@@ -10,6 +10,8 @@ function [W1, W2] = trainneuralnet(X,Y,nhid,lambda)
 
 %getting row size of matrix X
 [Xrow,Xcol] = size(X);
+
+%for keeping track of every 1000 iterations
 pbreak = 0;
 
 % load in and set up trainX as the training X pts and trainY as the Y pts
@@ -118,9 +120,8 @@ while 1
     drawnow;
   end
   %}
-  
 
-end
+end % end while loop
   
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  %      Final output block for generating the plots           %
@@ -138,5 +139,5 @@ end
   
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
    
-end
+end % end function
 
