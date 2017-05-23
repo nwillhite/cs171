@@ -15,8 +15,8 @@ x = [1 X];
 a = x * W1';
 
 %sigmoidal function to get z
-z = sigmf(a,[1 0]);
-%z = 1 ./ (1 + exp(-1 .* a))
+%z = sigmf(a,[1 0])
+z = 1 ./ (1 + exp(-1 .* a))
 
 %appends a row of 1's to top of matrix z
 %z = [1 ; z];
@@ -26,8 +26,8 @@ z = [1 z];
 a1 = z * W2';
 
 %sigmoidal function to get f
-%f = 1 ./ (1 + exp(-1 .* a1));
-f = sigmf(a1,[1 0]);
+f = 1 ./ (1 + exp(-1 .* a1))
+%f = sigmf(a1,[1 0])
 
 
 end
