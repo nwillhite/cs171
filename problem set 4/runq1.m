@@ -18,7 +18,7 @@ dt = learndt(trainX, trainY, ftype, @scorefn);
 %drawdt(dt);
 pdt = prunedt(dt,prunX,prunY);
 %drawdt(pdt);
-Y = predictdt(dt,Mtest);
-drawdt(dt);
+Y = predictdt(pdt,Mtest);
+drawdt(pdt);
 
 end
