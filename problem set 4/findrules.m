@@ -6,8 +6,15 @@
     Problem Set 4
 %}
 
-function findrules(D, smin, amin)
+function [I, num, m] = findrules(D, smin, amin)
 
+I = items(D);
+
+d = D.data;
+
+m = numexamples(D);
+
+num = getcount(I,D);
 
 
 end
