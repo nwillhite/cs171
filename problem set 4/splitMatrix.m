@@ -5,25 +5,25 @@
     CS 171 
     Problem Set 4
 %}
-function [trainX,trainY,Mtest,prunX,prunY] = splitMatrix()
+function [trainX,trainY,testX,prunX,prunY] = splitMatrix()
 
 %load in the data sets
-Mtrain = load('banktrain.data');
-Mtest = load('banktestX.data');
+train = load('banktrain.data');
+testX = load('banktestX.data');
 
 %grabs coloumn size for Mtrain
-[row, col] = size(Mtrain);
+[row, col] = size(train);
 
 % Determine the last row number of the top (upper) 65% of rows.
-lastRow = int32(floor(0.65 * row));
+cutoff = int32(floor(0.65 * row));
 
 %splits the x and y for training
 %Get first 65%
-trainX = Mtrain(1:lastRow,[1:col-1]);
-trainY = Mtrain(1:lastRow,end);
+trainX = train(1:cutoff,1:col-1);
+trainY = train(1:cutoff,end);
 
 %use the last 35% as the pruning set
-prunX = Mtrain(lastRow+1:end,[1:col-1]);
-prunY = Mtrain(lastRow+1:end,end);
+prunX = train(cutoff+1:end,1:col-1);
+prunY = train(cutoff+1:end,end);
 
 end
