@@ -16,8 +16,8 @@ ftype= [0 12 4 8 3 3 3 2 0 0 0 0 0 3 0 0 0 0 0];
 [trainX,trainY,testX,prunX,prunY] = splitMatrix();
 
 dt = learndt(trainX, trainY, ftype, @scorefn);
-pdt = prunedt(dt,prunX,prunY);
-Y = predictdt(pdt,testX);
-drawdt(pdt);
+dt = prunedt(dt,prunX,prunY);
+Y = predictdt(dt,testX);
+drawdt(dt);
 
 end
