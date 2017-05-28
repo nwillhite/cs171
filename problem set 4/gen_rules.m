@@ -11,10 +11,10 @@ function [supp,conf,rules] = gen_rules(ruleSet,D,numExam,smin,amin)
 supp = [];
 conf = []; 
 rules = {};
-[~, testcol] = size(ruleSet);
+[~, rulecol] = size(ruleSet);
 
 %goes through all cells of ruleset
-for i = 1:testcol
+for i = 1:rulecol
     
     %current ruleSet cell at pos i
     rSet = ruleSet{i};
@@ -47,13 +47,13 @@ for i = 1:testcol
                     y = setdiff(cSet, x);
                     
                     %grabs the numerator
-                    num = getcount(union(x,y), D);
+                    numerator = getcount(union(x,y), D);
                     
                     %grabs the denominator
-                    denom = getcount(x, D);
+                    denominator = getcount(x, D);
                     
                     %takes confindence
-                    con = num/denom;
+                    con = numerator/denominator;
                     
                     %check to see if smin and amin conditions are met
                     if(sup > smin && con > amin)
