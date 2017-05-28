@@ -6,16 +6,38 @@
     Problem Set 4
 %}
 
-function [I, num, m] = findrules(D, smin, amin)
-
+function [ruleSet] = findrules(D,smin, amin)
 I = items(D);
+buildingSet = items(D)';
+ruleSet = {};
+numExam = numexamples(D);
+%num = getcount(I(8),D);
+%C = {};
 
-d = D.data;
+while 1
+    buildingSet = [];
+    temp = buildingSet;
+    [trow,~] = size(temp);
 
-m = numexamples(D);
+    for i = 1:trow
+      sup = support(temp(i,:), D, numExam, smin);
+      if sup == 1
+        buildingSet = [buildingSet; temp(i,:)];
+      end
+    end
 
-num = getcount(I,D);
+    [brow,~] = size(buildingSet);
 
+    set = apriori_gen(brow,buildingSet);
+
+    buildingSet = set;
+
+    ruleSet = [ruleSet buildingSet];
+    
+    if isempty(buildingSet)
+        break
+    end
 
 end
 
+end %findrules end
