@@ -12,7 +12,7 @@ supp = [];
 conf = []; 
 rules = {};
 [~, rulecol] = size(ruleSet);
-
+disp(ruleSet);
 %goes through all cells of ruleset
 for i = 1:rulecol
     
@@ -56,14 +56,20 @@ for i = 1:rulecol
                     con = numerator/denominator;
                     
                     %check to see if smin and amin conditions are met
+                    %if(sup > smin && con > amin)
+                    %    supp = [supp ; sup];
+                    %    conf = [conf ; con];
+                    %    rules = [rules ; rule2str(x,y,D)];
+                    %end
+                    
+                end %end of if checking size(C)
+                    
+                    %check to see if smin and amin conditions are met
                     if(sup > smin && con > amin)
                         supp = [supp ; sup];
                         conf = [conf ; con];
                         rules = [rules ; rule2str(x,y,D)];
                     end
-                    
-                end %end of if checking size(C)
-
                 end %end of if checking s == 1
 
             end %end for m
