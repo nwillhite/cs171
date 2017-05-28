@@ -1,19 +1,32 @@
+%{
+    Nicholas Willhite
+    SID : 861239087
+    5/28/17
+    CS 171 
+    Problem Set 4
+%}
+
 function [supp,conf,rules] = gen_rules(ruleSet,D,numExam,smin,amin)
 
 supp = [];
 conf = []; 
 rules = {};
 [~, testcol] = size(ruleSet);
+
+%goes through all cells of ruleset
 for i = 1:testcol
-
-testing = ruleSet{i};
-[rowT, ~] = size(testing);
-
+    
+    %current ruleSet cell at pos i
+    rSet = ruleSet{i};
+    %size of ruleSet cell at pos i
+    [rowT, ~] = size(rSet);
+    
     for j = 1:rowT
-
-    cSet = testing(j,:);
-    [~,coltest] = size(cSet);
-    count = 1;
+        
+        %takes all rows with rSet for testing rules
+        cSet = rSet(j,:);
+        [~,coltest] = size(cSet);
+        count = 1;
 
         for k = 1: coltest -1
 
@@ -22,6 +35,7 @@ testing = ruleSet{i};
                 %building set
                 [s,sup] = support(cSet, D, numExam, smin);
                 if s == 1
+                    %grabs all possible x sets in cSet
                     x = cSet(:, m:m+(count-1));
 
                     %check setdifference and returns elements and indexs of those
@@ -29,16 +43,20 @@ testing = ruleSet{i};
 
                 %check to make sure setdiff is only a difference of 1
                 if size(C) == 1
-                    %check setdifference and returns elements and indexs of those 
+                    %check setdifference returns element 
                     y = setdiff(cSet, x);
-
+                    
+                    %grabs the numerator
                     num = getcount(union(x,y), D);
-
+                    
+                    %grabs the denominator
                     denom = getcount(x, D);
-
+                    
+                    %takes confindence
                     con = num/denom;
-
-                    if(con > amin && sup > smin)
+                    
+                    %check to see if smin and amin conditions are met
+                    if(sup > smin && con > amin)
                         supp = [supp ; sup];
                         conf = [conf ; con];
                         rules = [rules ; rule2str(x,y,D)];
