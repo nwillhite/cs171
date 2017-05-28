@@ -7,11 +7,10 @@
 %}
 
 function [ruleSet] = findrules(D,smin, amin)
-I = items(D);
-buildingSet = items(D)';
 ruleSet = {};
 numExam = numexamples(D);
-%num = getcount(I(8),D);
+buildingSet = items(D)';
+I = items(D);
 C = {};
 
 while 1
@@ -47,63 +46,11 @@ while 1
 
 end
 
-s = [];
-c = []; 
-rule = [];
-[~, testcol] = size(ruleSet);
-for i = 1:testcol
-
-    testing = ruleSet{i};
-    [rowT, ~] = size(testing);
-
-    for j = 1:rowT
-
-        cSet = testing(j,:);
-        [~,coltest] = size(cSet);
-        count = 1;
-        [~,sup] = support(cSet, D, numExam, smin);
-        for k = 1: coltest -1
-
-            for m = 1: coltest - k  + 1
-                %sup = support(cSet, D, numExam, smin);
-                x = cSet(:, m:m+(count-1));
-                [C,ia] = setdiff(cSet,x);
-
-                %check to make sure setdiff is only a difference of 1
-                if size(C) == 1
-                   %check setdifference and returns elements and indexs of those 
-                   y = setdiff(cSet, x);
-                   denom = getcount(x, D); %denominator
-                   num = getcount(union(x,y), D);
-                   con = num/denom;
-                end
-
-                if(con > amin && sup > smin)
-                s = [s ; sup];
-                c = [c ; con];
-                %disp(out);
-                rule = [rule ; {rule2str(x,y,D)}];
-                
-            end
-
-
-            end %end for m
-        count = count + 1;
-
-        end %end for k
-
-        %sup = support(cSet, D, numExam, smin);
-        %if sup == 1
-        %    buildingSet = [buildingSet; cSet];
-        %end   
-
-    end %end for j
-    
-end %end for i 
+[supp,conf,rules] = gen_rules(ruleSet,D,numExam,smin,amin);
    
-tblA = table(c,s,rule);
-tblB = sortrows(tblA,'c');
-tblB.Properties.VariableNames = {'Confidence' 'Support' 'Rule'};
+tblA = table(conf,supp,rules);
+tblB = sortrows(tblA,'conf');
+tblB.Properties.VariableNames = {'Confidence' 'Support' 'Rules'};
 disp(tblB);
 
 end %findrules end
