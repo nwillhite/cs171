@@ -6,16 +6,16 @@
     Problem Set 4
 %}
 
-function s = support(item,D,numExam,smin)
+function [s,sup] = support(item,D,numExam,smin)
 
 %returns count of item
 num = getcount(item,D);
 
 %calculates support
-support = num/numExam;
+sup = num/numExam;
 
     % if greater 1 if not 0
-    if support > smin
+    if sup > smin
         s = 1;
     else
         s = 0;
