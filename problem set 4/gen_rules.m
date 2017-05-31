@@ -12,7 +12,6 @@ supp = [];
 conf = []; 
 rules = {};
 [~, rulecol] = size(ruleSet);
-disp(ruleSet);
 %goes through all cells of ruleset
 for i = 1:rulecol
     
@@ -25,12 +24,12 @@ for i = 1:rulecol
         
         %takes all rows with rSet for testing rules
         cSet = rSet(j,:);
-        [~,coltest] = size(cSet);
+        [~,Ccol] = size(cSet);
         count = 1;
 
-        for k = 1: coltest -1
+        for k = 1: Ccol -1
 
-            for m = 1: coltest - k  + 1
+            for m = 1: Ccol - k  + 1
                 %gathers the support for each and if greater than smin adds to 
                 %building set
                 [s,sup] = support(cSet, D, numExam, smin);
