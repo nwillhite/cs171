@@ -6,7 +6,7 @@
     Problem Set 4
 %}
 
-function [ruleSet] = findrules(D,smin, amin)
+function findrules(D,smin, amin)
 ruleSet = {};
 numExam = numexamples(D);
 buildingSet = items(D)';
